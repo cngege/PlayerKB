@@ -1,16 +1,15 @@
-#pragma once
+﻿#pragma once
 
 #define PLUGIN_VERSION_DEV     0
 #define PLUGIN_VERSION_BETA    1
 #define PLUGIN_VERSION_RELEASE 2
 
 // Plugin Information, used in dllmain.cpp for register plugin
-static_assert(false, "Please modify your plugin registration details and delete this line");
-#define PLUGIN_NAME                 "PluginName"
-#define PLUGIN_INTRODUCTION         "Introduction"
-#define PLUGIN_AUTHOR               "AuthorName"
+#define PLUGIN_NAME                 "PlayerKB"
+#define PLUGIN_INTRODUCTION         "玩家击退&间隔控制"
+#define PLUGIN_AUTHOR               "CNGEGE"
 #define PLUGIN_VERSION_MAJOR        1
-#define PLUGIN_VERSION_MINOR        0
+#define PLUGIN_VERSION_MINOR        2
 #define PLUGIN_VERSION_REVISION     0
 #define PLUGIN_VERSION_BUILD        0
 #define PLUGIN_VERSION_STATUS       PLUGIN_VERSION_DEV
