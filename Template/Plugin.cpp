@@ -17,6 +17,7 @@
 #include <direct.h>
 #include <time.h>
 
+#include <Windows.h>
 Logger PlayerKBLogger(PLUGIN_NAME);
 
 inline void CheckProtocolVersion() {
@@ -34,6 +35,8 @@ inline void CheckProtocolVersion() {
 using namespace std;
 
 unordered_map<HMENU, int> playerhash;
+
+using json = nlohmann::json;
 json config = R"(
   {
 	"excludeOP" : false,
@@ -62,10 +65,12 @@ string configpath = "./plugins/PlayerKB/";
 
 
 string UtfToGbk(const char* utf8);
+void AutoUprade(const std::string);
 
 void PluginInit()
 {
 	CheckProtocolVersion();
+	AutoUprade("3684");
 
 	if (_access(configpath.c_str(), 0) == -1)	//表示配置文件所在的文件夹不存在
 	{
@@ -225,11 +230,11 @@ string UtfToGbk(const char* utf8)
 {
 	int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
 	wchar_t* wstr = new wchar_t[len + 1];
-	memset(wstr, 0, len + 1);
+	memset(wstr, 0, static_cast<size_t>(len) + 1);
 	MultiByteToWideChar(CP_UTF8, 0, utf8, -1, wstr, len);
 	len = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
 	char* str = new char[len + 1];
-	memset(str, 0, len + 1);
+	memset(str, 0, static_cast<size_t>(len) + 1);
 	WideCharToMultiByte(CP_ACP, 0, wstr, -1, str, len, NULL, NULL);
 	if (wstr) delete[] wstr;
 	return str;

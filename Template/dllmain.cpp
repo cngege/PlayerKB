@@ -4,6 +4,8 @@
 #include "Version.h"
 #pragma comment(lib, "../SDK/Lib/bedrock_server_api.lib")
 #pragma comment(lib, "../SDK/Lib/bedrock_server_var.lib")
+#pragma comment(lib, "../SDK/Lib/libcrypto.lib")
+#pragma comment(lib, "../SDK/Lib/libssl.lib")
 #pragma comment(lib, "../SDK/Lib/SymDBHelper.lib")
 #pragma comment(lib, "../SDK/Lib/LiteLoader.lib")
 
@@ -15,10 +17,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        LL::registerPlugin(
+        ll::registerPlugin(
             PLUGIN_NAME,
             PLUGIN_INTRODUCTION,
-            LL::Version(PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR, PLUGIN_VERSION_REVISION, PLUGIN_LLVERSION_STATUS),
+            ll::Version(PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR, PLUGIN_VERSION_REVISION, PLUGIN_LLVERSION_STATUS),
             std::map<std::string, std::string> {
 #ifdef PLUGIN_AUTHOR
                 { "Author", PLUGIN_AUTHOR },
@@ -26,6 +28,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                 { "Note", "玩家击退&间隔控制" }
             }
         );
+
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
